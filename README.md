@@ -73,4 +73,8 @@ Pengguna yang dituju dalam aplikasi ini adalah healthcare staff dalam rumah saki
 7. Kasir → tracking pemasukan harian yang didapatkan di rumah sakit dari konsultasi dokter, pembelian obat di apotek, atau melakukan test lab.
 
 # Alur pengintegrasian dengan web service untuk terhubung dengan aplikasi web
-TODO
+1. Anggota kelompok mengimplementasikan library http dan map pada proyek Flutter untuk mengambil data dalam format JSON melalui HTTP Request 
+2. Menggunakan REST API yang digunakan pada Django. Agar API dapat diakses, maka kami menambahkan middleware dan views.py dengan menggunakan JSONResponse/JSON Serializer.
+3. Mengimplementasikan desain yang sudah ditampilkan di web
+4. Membuat fungsi asynchronous untuk setiap proses yang memerlukan delivery data atau modifikasi data (integrasi antara front - end dan back - end)
+5. Menggunakan metode POST dan GET yang mempunyai fungsi masing - masing, GET untuk Get data JSON dari HTTP Get (mengambil data yang diolah nanti di widget masing - masing), dan POST digunakan untuk mengirim data ke database django.
