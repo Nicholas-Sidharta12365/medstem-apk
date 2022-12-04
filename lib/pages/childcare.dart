@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medstem/pages/childcare.dart';
+import '../main.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Childcare extends StatelessWidget {
+  const Childcare({super.key});
 
   // This widget is the root of your application.
   @override
@@ -25,13 +21,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.indigo,
       ),
-      home: const MyHomePage(title: 'MedStem'),
+      home: const ChildcarePage(title: 'Childcare'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class ChildcarePage extends StatefulWidget {
+  const ChildcarePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -45,10 +41,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ChildcarePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<ChildcarePage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -74,50 +70,43 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Row(
-            children: [
-                Image.asset(
-                  'assets/med_logo.png',
-                  height: 30,
-                  width: 30,
-                  ), 
-                Text(" ${widget.title}"),
-              ]
-        ),
+        title: Row(children: [
+          Image.asset(
+            'assets/med_logo.png',
+            height: 30,
+            width: 30,
+          ),
+          Text(" ${widget.title}"),
+        ]),
       ),
       drawer: Drawer(
-          child: Column(
-            children: [
-              // Menambahkan clickable menu
-              ListTile(
-                title: const Text('Home'),
-                onTap: () {
-                  // Route menu ke halaman utama
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const MyHomePage(title: 'Home')
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: const Text('Childcare'),
-                onTap: () {
-                  // Route menu ke halaman utama
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const Childcare()
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            // Menambahkan clickable menu
+            ListTile(
+              title: const Text('Home'),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyHomePage(title: 'Home')),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Childcare'),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Childcare()),
+                );
+              },
+            ),
+          ],
         ),
+      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
