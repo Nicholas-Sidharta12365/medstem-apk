@@ -61,7 +61,7 @@ class _MyHomePageState extends State<KasirPage> {
           Text(" ${widget.title}"),
         ]),
       ),
-      drawer: const MyDrawer(),
+      drawer: const DrawerClass(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

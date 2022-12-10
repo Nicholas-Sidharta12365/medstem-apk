@@ -2,40 +2,73 @@ import 'package:flutter/material.dart';
 import 'package:medstem/pages/kasir/kasir.dart';
 import 'package:medstem/main.dart';
 import 'package:medstem/pages/childcare/childcare.dart';
+import 'package:medstem/pages/vaksin/vaccine_data_page.dart';
+import 'package:medstem/login.dart';
 
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
+class DrawerClass extends StatefulWidget {
+  const DrawerClass({Key? key}) : super(key: key);
+
+  @override
+  _MyDrawer createState() => _MyDrawer();
+}
+
+class _MyDrawer extends State<DrawerClass> {
+    @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
+      child: ListView(
+        padding: EdgeInsets.zero,
         children: [
-          // Menambahkan clickable menu
+          // other children,
           ListTile(
-            title: const Text('Home'),
+            leading: Icon(Icons.home_work),
+            title: Text("Home"),
             onTap: () {
-              // Route menu ke halaman utama
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Home')),
+                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Homepage")),
               );
             },
           ),
           ListTile(
-                title: const Text('Childcare'),
-                onTap: () {
-                  // Route menu ke halaman utama
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Childcare()),
-                  );
-                },
-              ),
-          ListTile(
-            title: const Text('Checkout'),
+            leading: Icon(Icons.people),
+            title: Text("Login"),
             onTap: () {
-              // Route menu ke halaman utama
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.health_and_safety),
+            title: const Text("Childcare"),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const ChildcarePage(title: "Childcare")),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.vaccines),
+            title: Text("Vaksin"),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const VaccineDataPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.money),
+            title: Text("Checkout"),
+            onTap: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const Kasir()),
