@@ -134,7 +134,7 @@ class _MyHomePageState extends State<KasirPage> {
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 400,
+                    height: 600,
                     child: Center(
                       child: ElevatedButton(
                         child: const Text('Close'),
