@@ -2,14 +2,18 @@
 //
 //     final welcome = welcomeFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final chasier = chasierFromJson(jsonString);
+
 import 'dart:convert';
 
-List<Welcome> welcomeFromJson(String str) => List<Welcome>.from(json.decode(str).map((x) => Welcome.fromJson(x)));
+List<Chasier> chasierFromJson(String str) => List<Chasier>.from(json.decode(str).map((x) => Chasier.fromJson(x)));
 
-String welcomeToJson(List<Welcome> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String chasierToJson(List<Chasier> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Welcome {
-    Welcome({
+class Chasier {
+    Chasier({
         required this.model,
         required this.pk,
         required this.fields,
@@ -19,7 +23,7 @@ class Welcome {
     int pk;
     Fields fields;
 
-    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+    factory Chasier.fromJson(Map<String, dynamic> json) => Chasier(
         model: json["model"],
         pk: json["pk"],
         fields: Fields.fromJson(json["fields"]),
@@ -71,3 +75,4 @@ class Fields {
         "bill": bill,
     };
 }
+

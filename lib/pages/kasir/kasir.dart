@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:medstem/widgets/drawer.dart';
 
+
 class Kasir extends StatelessWidget {
   const Kasir({super.key});
 
