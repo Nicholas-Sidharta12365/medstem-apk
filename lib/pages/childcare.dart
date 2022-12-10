@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medstem/widgets/drawer.dart';
 import '../main.dart';
 
 class Childcare extends StatelessWidget {
@@ -79,34 +80,7 @@ class _MyHomePageState extends State<ChildcarePage> {
           Text(" ${widget.title}"),
         ]),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            ListTile(
-              title: const Text('Home'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyHomePage(title: 'Home')),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Childcare'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Childcare()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const MyDrawer(),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.

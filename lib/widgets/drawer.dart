@@ -13,7 +13,7 @@ class MyDrawer extends StatelessWidget {
         children: [
           // Menambahkan clickable menu
           ListTile(
-            title: const Text('Counter'),
+            title: const Text('Home'),
             onTap: () {
               // Route menu ke halaman utama
               Navigator.pushReplacement(
