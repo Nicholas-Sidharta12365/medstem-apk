@@ -79,7 +79,7 @@ class _MyHomePageState extends State<ChildcarePage> {
           Text(" ${widget.title}"),
         ]),
       ),
-      drawer: const MyDrawer(),
+      drawer: const DrawerClass(),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.

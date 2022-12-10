@@ -45,8 +45,8 @@ class _MyHomePageState extends State<KasirPage> {
           Text(" ${widget.title}"),
         ]),
       ),
-      drawer: const MyDrawer(),
-      body: SafeArea(
+      drawer: const DrawerClass(),
+      body: Center(
         child: Column(
           children: [
             
