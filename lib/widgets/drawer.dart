@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medstem/pages/kasir/kasir.dart';
 import 'package:medstem/main.dart';
-import 'package:medstem/pages/childcare.dart';
+import 'package:medstem/pages/childcare/childcare.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
