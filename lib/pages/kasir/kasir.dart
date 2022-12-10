@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:medstem/widgets/drawer.dart';
 
 class Kasir extends StatelessWidget {
@@ -27,27 +28,9 @@ class KasirPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<KasirPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -62,19 +45,110 @@ class _MyHomePageState extends State<KasirPage> {
         ]),
       ),
       drawer: const MyDrawer(),
-      body: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+          children: [
+            
           ],
         ),
+      ),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        backgroundColor: Colors.black,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.4,
+        spacing: 12,
+        spaceBetweenChildren: 12,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.add),
+            label: 'Create Bill',
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: 400,
+                    child: Center(
+                      child: ElevatedButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.payment),
+            label: 'Payment Bill',
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: 400,
+                    child: Center(
+                      child: ElevatedButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.browser_updated),
+            label: 'Update Bill',
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: 400,
+                    child: Center(
+                      child: ElevatedButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.auto_delete),
+            label: 'Delete Bill',
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: 400,
+                    child: Center(
+                      child: ElevatedButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods
     );
   }
