@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medstem/widgets/drawer.dart';
-import '../main.dart';
 
 class Childcare extends StatelessWidget {
   const Childcare({super.key});
