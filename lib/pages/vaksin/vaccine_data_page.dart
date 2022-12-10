@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:medstem/model/vaccine_data.dart';
 
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
 class VaccineDetails {
   static late Fields _getDetails;
   static Fields get fetcher => _getDetails;
@@ -17,20 +20,9 @@ class VaccineDataPage extends StatefulWidget {
 }
 
 class _VaccineDataPageState extends State<VaccineDataPage> {
-  Future<List<VaccineData>> fetchVaccineData() async {
-    var url = Uri.parse(
-        'https://medstem.up.railway.app/vaksin/json/');
-    var response = await http.get(
-      url,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    );
-   // print(response.body);
-
+  Future<List<VaccineData>> fetchVaccineData(CookieRequest request) async {
     // decode the response into the json form
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    var data = await request.get('https://medstem.up.railway.app/vaksin/json1/');
 
     // convert the json data into VaccineData object
     List<VaccineData> listVaccineData = [];
@@ -44,13 +36,15 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Data Vaksin'),
         ),
         drawer: DrawerClass(),
         body: FutureBuilder(
-            future: fetchVaccineData(),
+            future: fetchVaccineData(request),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 // print("null geming");

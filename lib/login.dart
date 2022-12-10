@@ -4,6 +4,9 @@ import 'package:medstem/main.dart';
 import 'dart:convert';
 import 'package:medstem/widgets/drawer.dart';
 
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -18,12 +21,22 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Login Page"),
         ),
         drawer: DrawerClass(),
-        body: Form(
+        body: Container(
+          decoration: BoxDecoration(
+            image: const DecorationImage(
+              image: const AssetImage("assets/home.png"),
+              fit: BoxFit.cover,
+              opacity: 0.5,
+            ) 
+          ),
+          child: Form(
             key: _loginFormKey,
             child: Center(
               child: Container(
@@ -122,19 +135,14 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           onPressed: () async {
                             if (_loginFormKey.currentState!.validate()) {
-                              final response = await http.post(
-                                  Uri.parse(
-                                      "https://medstem.up.railway.app/login-flutter/"),
-                                  headers: <String, String>{
-                                    'Content-Type':
-                                        'application/json;charset=UTF-8'
-                                  },
-                                  body: jsonEncode(<String, String>{
+                              final response = await request.post(
+                                      "https://medstem.up.railway.app/login-flutter/",
+                                       jsonEncode(<String, String>{
                                     'username': username,
                                     'password': password
                                   }));
                               // print(response.body);
-                              bool status = jsonDecode(response.body)['status'];
+                              bool status = response['status'];
                               // print(jsonDecode(response.body));
                               if (status) {
                                 ScaffoldMessenger.of(context)
@@ -181,6 +189,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   )),
-            )));
+            ))));
   }
 }
