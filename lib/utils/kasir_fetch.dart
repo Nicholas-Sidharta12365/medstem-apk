@@ -16,12 +16,12 @@ Future<List<Chasier>> fetchBmi() async {
   var data = jsonDecode(utf8.decode(response.bodyBytes));
 
   // melakukan konversi data json menjadi object Bmi
-  List<Chasier> listMyBmi = [];
+  List<Chasier> listMyChasier = [];
   for (var d in data) {
     if (d != null) {
-      listMyBmi.add(Chasier.fromJson(d));
+      listMyChasier.add(Chasier.fromJson(d));
     }
   }
 
-  return listMyBmi;
+  return listMyChasier;
 }
