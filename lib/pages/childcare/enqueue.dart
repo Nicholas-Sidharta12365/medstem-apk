@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:medstem/model/childcaremodel.dart';
 import 'package:medstem/widgets/drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 
 class Enqueue extends StatelessWidget {
   const Enqueue({super.key});
@@ -36,6 +39,7 @@ class EnqueueFormState extends State<EnqueueForm> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: Row(children: [
@@ -106,32 +110,16 @@ class EnqueueFormState extends State<EnqueueForm> {
                   Container(
                     margin: const EdgeInsets.only(top: 40, bottom: 40),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-
-                          // Handle form submission here
-                          print(_name);
-                          print(_doctor);
-                          print(_description);
-
-                          Future<int> postChildcareData(
-                              CookieRequest request) async {
-                            final request = context.watch<CookieRequest>();
-                            /* POST request example: */
-                            final response = await request.post(
-                                'https://medstem.up.railway.app/childcare/add/',
-                                {
-                                  "name": _name,
-                                  "date": DateTime.now(),
-                                  "doctor": _doctor,
-                                  "description": _description,
-                                });
-
-                            return response;
-                          }
-
-                          postChildcareData(request!);
+                          final response = await request.post(
+                              'https://medstem.up.railway.app/childcare/flutter_add/',
+                              jsonEncode(<String, String>{
+                                "name": _name,
+                                "doctor": _doctor,
+                                "description": _description,
+                              }));
                         }
                       },
                       child: const Text('Submit'),

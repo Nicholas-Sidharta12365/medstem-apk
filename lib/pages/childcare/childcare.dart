@@ -33,7 +33,9 @@ class ChildcarePage extends StatefulWidget {
 class _MyHomePageState extends State<ChildcarePage> {
   Future<List<ChildcareModel>> fetchChildcareData(CookieRequest request) async {
     // decode the response into the json form
-    var data = await request.get('https://medstem.up.railway.app/childcare/json/');
+
+    var data =
+        await request.get('https://medstem.up.railway.app/childcare/json/');
 
     // convert the json data into VaccineData object
     List<ChildcareModel> listVaccineData = [];
@@ -43,7 +45,6 @@ class _MyHomePageState extends State<ChildcarePage> {
       }
     }
 
-    print(listVaccineData);
     return listVaccineData;
   }
 
@@ -126,12 +127,12 @@ class _MyHomePageState extends State<ChildcarePage> {
               future: fetchChildcareData(request),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
-                  // print("null geming");
                   return const Center(child: CircularProgressIndicator());
-                  // return const Text("404 Sadge");
                 } else {
                   if (snapshot.hasData) {
                     return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (_, index) => DataTable(
                         columns: const [
@@ -142,11 +143,14 @@ class _MyHomePageState extends State<ChildcarePage> {
                         ],
                         rows: [
                           DataRow(cells: [
-                            DataCell(Text('${snapshot.data![index].name}')),
-                            DataCell(Text('${snapshot.data![index].date}')),
-                            DataCell(Text('${snapshot.data![index].doctor}')),
                             DataCell(
-                                Text('${snapshot.data![index].description}')),
+                                Text(snapshot.data![index].fields.name)),
+                            DataCell(
+                                Text(snapshot.data![index].fields.date)),
+                            DataCell(
+                                Text(snapshot.data![index].fields.doctor)),
+                            DataCell(Text(
+                                snapshot.data![index].fields.description)),
                           ]),
                         ],
                       ),
