@@ -36,7 +36,6 @@ class _MyHomePageState extends State<ChildcarePage> {
 
     var data =
         await request.get('https://medstem.up.railway.app/childcare/json/');
-
     // convert the json data into VaccineData object
     List<ChildcareModel> listVaccineData = [];
     for (var d in data) {
@@ -51,6 +50,8 @@ class _MyHomePageState extends State<ChildcarePage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
+    bool status = request.loggedIn;
 
     return Scaffold(
       appBar: AppBar(
@@ -98,6 +99,7 @@ class _MyHomePageState extends State<ChildcarePage> {
               ),
             ),
           ),
+          if(status)...[
           Container(
             margin: const EdgeInsets.only(bottom: 40),
             child: Row(
@@ -112,12 +114,6 @@ class _MyHomePageState extends State<ChildcarePage> {
                       MaterialPageRoute(
                           builder: (context) => const EnqueueForm()),
                     );
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('Update'),
-                  onPressed: () {
-                    // handler
                   },
                 ),
               ],
@@ -143,14 +139,11 @@ class _MyHomePageState extends State<ChildcarePage> {
                         ],
                         rows: [
                           DataRow(cells: [
+                            DataCell(Text(snapshot.data![index].fields.name)),
+                            DataCell(Text(snapshot.data![index].fields.date)),
+                            DataCell(Text(snapshot.data![index].fields.doctor)),
                             DataCell(
-                                Text(snapshot.data![index].fields.name)),
-                            DataCell(
-                                Text(snapshot.data![index].fields.date)),
-                            DataCell(
-                                Text(snapshot.data![index].fields.doctor)),
-                            DataCell(Text(
-                                snapshot.data![index].fields.description)),
+                                Text(snapshot.data![index].fields.description)),
                           ]),
                         ],
                       ),
@@ -170,6 +163,20 @@ class _MyHomePageState extends State<ChildcarePage> {
                   }
                 }
               }),
+          ]
+          else...[
+            Container(
+              margin: const EdgeInsets.only(bottom: 40, top: 40),
+              child: const Text(
+                "Please Log In to See the Queue",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ]
         ],
       ),
     );
