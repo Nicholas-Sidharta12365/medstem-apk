@@ -3,6 +3,7 @@ import 'package:medstem/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:medstem/model/vaccine_data.dart';
+import 'package:medstem/pages/vaksin/vaccine_add.dart';
 
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -43,7 +44,8 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
           title: const Text('Data Vaksin'),
         ),
         drawer: DrawerClass(),
-        body: FutureBuilder(
+        body: Column(children: [
+        FutureBuilder(
             future: fetchVaccineData(request),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
@@ -64,6 +66,7 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                   );
                 } else {
                   return ListView.builder(
+                      shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (_, index) => Container(
                             margin: const EdgeInsets.symmetric(
@@ -117,7 +120,7 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                                             textAlign: TextAlign.center,
                                             ),
                                           Text(
-                                            "Total Dosis : " + VaccineDetails.fetcher.dose.toString(),
+                                            "Total Dosis : " + VaccineDetails.fetcher.dose.toString() + " mg",
                                             textAlign: TextAlign.center,
                                             ),
                                           TextButton(
@@ -143,11 +146,31 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                                   )
                                 ),
                                 const SizedBox(height: 10),
+                                //Spacer(),
+                                
                               ],
                             ),
                           ));
                 }
               }
-            }));
+            }),
+            TextButton(
+                child: const Text(
+                  "Add Vaksin",
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const VaccineAddPage()));
+                }
+              ),
+            ])
+
+        );
   }
 }
