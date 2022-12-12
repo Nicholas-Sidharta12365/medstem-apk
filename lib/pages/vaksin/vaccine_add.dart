@@ -28,6 +28,7 @@ class _VaccineAddPageState extends State<VaccineAddPage> {
   final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(title: const Text('Add Vaksin')),
+      drawer: DrawerClass(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
