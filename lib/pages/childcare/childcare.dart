@@ -69,12 +69,28 @@ class _MyHomePageState extends State<ChildcarePage> {
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 40, top: 40),
-            child: const Text(
-              "CHILDCARE",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
+            child: Center(
+              child: RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'CHILD',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 230, 48, 35),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'CARE',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 12, 112, 195),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
