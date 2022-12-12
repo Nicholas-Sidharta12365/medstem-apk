@@ -3,7 +3,7 @@
    <application
         android:label="medstem"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/med_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"

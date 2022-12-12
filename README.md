@@ -14,7 +14,8 @@ flutter run
 ```
 
 # How to use
-Download the latest release of the app (On-Progress)
+Download the latest release of the app (On-Progress)<br>
+Download Link: APP LINK TODO
 
 # Nama-nama anggota kelompok
 1. Naila Azizah - 2106705814
@@ -28,13 +29,11 @@ Aplikasi yang akan kami buat adalah sebuah aplikasi untuk memudahkan pelayanan r
 
 # Daftar modul yang akan diimplementasikan
 Dari manfaat yang disebutkan diatas, maka kelompok kami membuat lima fitur dalam menunjang aplikasi ini, sebagai berikut:
-1. Implementasi Register, login, logout
+1. Implementasi login dan logout
 Fitur ini mengelompokkan halaman sesuai dengan peran user yang login karena setiap peran akan mendapatkani fitur yang berbeda
 2. Childcare (Nicholas Sidharta): mengatur antrian dokter anak
 Fitur ini akan dapat diakses oleh tenaga medis khusus anak dan meliputi views sebagai berikut:
     - add queue: untuk menambahkan seorang pasien ke dalam antrian
-    - update queue: untuk menunjukkan/memperbarui antrian pasien anak yang ada
-    - complete a queue: untuk seorang staff childcare menghapus antrian yang sudah selesai
     - no login page: page untuk pengguna yang tidak login
 3. Rawat Jalan (Amelia Putri Chaerani) : mengatur antrian dokter umum
 Fitur ini akan dapat diakses oleh tenaga medis dokter umum dan perawat dan meliputi views sebagai berikut:
@@ -44,7 +43,6 @@ Fitur ini akan dapat diakses oleh tenaga medis dokter umum dan perawat dan melip
     - patient_payment_status: untuk menunjukkan apakah pasien sudah membayar biaya berobat atau belum
 4. Vaksin (Rafif Naufal Rahmadika) : track aktivitas vaksin
     - get_vaksin_data: mendapatkan data mengenai jenis-jenis vaksin
-    - get_stock: mendapatkan data stock 1 jenis vaksin
     - edit_dose: mengubah dosis vaksin yang diberikan
     - get_added_vaksin: mendapatkan data vaksin yang hanya ditambahkan oleh user
     - add_vaksin: menambah jenis vaksin yang akan digunakan pada pasien
