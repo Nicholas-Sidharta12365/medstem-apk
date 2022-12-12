@@ -55,6 +55,7 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+
           ListTile(
             leading: Icon(Icons.vaccines),
             title: Text("Vaksin"),
