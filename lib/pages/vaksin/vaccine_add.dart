@@ -28,7 +28,6 @@ class _VaccineAddPageState extends State<VaccineAddPage> {
   final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(title: const Text('Add Vaksin')),
-      drawer: DrawerClass(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -161,6 +160,11 @@ class _VaccineAddPageState extends State<VaccineAddPage> {
                   )
                 ),
                 // Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+
                 TextButton(
                   child: const Text(
                     "Simpan",
@@ -218,6 +222,8 @@ class _VaccineAddPageState extends State<VaccineAddPage> {
                     }
                   },
                 ),
+              ])
+                
               ],
               )
           )
