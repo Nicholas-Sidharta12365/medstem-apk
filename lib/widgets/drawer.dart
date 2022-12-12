@@ -72,7 +72,7 @@ class _MyDrawer extends State<DrawerClass> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const Apotek()),
+                MaterialPageRoute(builder: (context) => const ApotekMainPage()),
               );
             },
           ),

@@ -1,22 +1,11 @@
 // To parse this JSON data, do
 //
 //     final welcome = welcomeFromJson(jsonString);
-
-// To parse this JSON data, do
-//
-//     final chasier = chasierFromJson(jsonString);
+// DONEEEEE
 
 import 'dart:convert';
 
 PatientData patientDataFromJson(String str) => PatientData.fromJson(json.decode(str));
-
-//String patientDataToJson(PatientData data) => json.encode(data.toJson());
-
-
-
-// List<PatientData> patientDataFromJson(String str) => List<PatientData>.from(json.decode(str).map((x) => PatientData.fromJson(x)));
-
-// String patientDataToJson(List<PatientData> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class PatientData {
     PatientData({
@@ -35,11 +24,11 @@ class PatientData {
         fields: Fields.fromJson(json["fields"]),
     );
 
-    /*Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "model": model,
         "pk": pk,
         "fields": fields.toJson(),
-    };*/
+    };
 }
 
 class Fields {
@@ -49,10 +38,9 @@ class Fields {
         required this.patient_age,
         required this.patient_gender,
         required this.medicine,
-        // required this.
     });
 
-    int user;
+    int? user;
     String patient_name;
     int patient_age;
     String patient_gender;
