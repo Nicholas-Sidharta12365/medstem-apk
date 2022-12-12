@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medstem/pages/apotek/apotek.dart';
 import 'package:medstem/pages/kasir/kasir.dart';
 import 'package:medstem/main.dart';
 import 'package:medstem/pages/childcare/childcare.dart';
@@ -83,6 +84,16 @@ class _MyDrawer extends State<DrawerClass> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const VaccineDataPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.medication_liquid_sharp),
+            title: Text("Pharmacy"),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const ApotekMainPage()),
               );
             },
           ),
