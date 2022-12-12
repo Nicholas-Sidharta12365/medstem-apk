@@ -19,7 +19,7 @@ flutter run
 
 # How to use
 Download the latest release of the app (On-Progress)<br>
-Download Link: <a href="install.appcenter.ms/orgs/f06-pbp-2022-2023/apps/medstem/distribution_groups/public">Microsoft App Center</a>
+Download Link: https://install.appcenter.ms/orgs/f06-pbp-2022-2023/apps/medstem/distribution_groups/public
 
 # Nama-nama anggota kelompok
 1. Naila Azizah - 2106705814
