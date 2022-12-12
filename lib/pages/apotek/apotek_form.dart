@@ -445,68 +445,22 @@ class _ApotekFormPageState extends State<ApotekFormPage> {
                       },
                       activeColor: Colors.red,
                     ),
-                    ElevatedButton(
-                        child: const Text("OK"),
-                        onPressed: () {
-                          send_data();
-                          TextButton(
-                            child: const Text(
-                              "Simpan",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.blue),
-                            ),
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                final response = await request.post(
-                                    'https://medstem.up.railway.app/apotek/json/',
-                                    jsonEncode(<String, String>{
-                                      'patient_name': patient_name,
-                                      'patient_age': patient_age,
-                                      'patient_gender': _jeniskelamin,
-                                      // 'medicine':
-                                    })
-                                );
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const ApotekMainPage()));
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Dialog(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        elevation: 15,
-                                        child: Container(
-                                          child: ListView(
-                                            padding: const EdgeInsets.only(top: 20, bottom: 20),
-                                            shrinkWrap: true,
-                                            children: <Widget>[
-                                              const SizedBox(height: 20),
-                                              // TODO: Munculkan informasi yang didapat dari form
-                                              const Text(
-                                                'Data berhasil ditambahkan',
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text('Kembali'),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                );
-                              }
-                            },
-                          );
-                        }),
+                    FloatingActionButton(
+                    child: Icon(Icons.arrow_forward),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            MyMedicationPage(
+                              patient_name: nameController.text,
+                              patient_age: ageController.text,
+                              // : diagnosisController.text,
+                              patient_gender: _jeniskelamin,
+                            )),
+                      );
+                    }
+    ),
+
                 ],
               )
           )
@@ -558,7 +512,7 @@ class _MedicationPageState extends State<MyMedicationPage> {
           return ListTile(
             onTap: () => onTap(isSelected, index),
             title: Text("${data['name']}"),
-            subtitle: Text("${data['email']}"),
+            subtitle: Text("${data['detail']}"),
             leading: _buildSelectIcon(isSelected, data),
           );
         },
@@ -595,58 +549,112 @@ class _MedicationPageState extends State<MyMedicationPage> {
                         ElevatedButton(
                             child: new Text("Back"),
                             onPressed: () => Navigator.pop(context)),
+                        const SizedBox(height: 20.0),
                         ElevatedButton(
-                          child: new Text("Add"),
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final response = await request.post(
-                                  'https://medstem.up.railway.app/apotek/json/',
-                                  jsonEncode(<String, String>{
-                                    'patient_name': patient_name,
-                                    'patient_age': patient_age,
-                                    'patient_gender': patient_gender,
-                                    // 'medicine': medicine,
-                                  })
-                              );
-
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const ApotekMainPage()));
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Dialog(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      elevation: 15,
-                                      child: Container(
-                                        child: ListView(
-                                          padding: const EdgeInsets.only(top: 20, bottom: 20),
-                                          shrinkWrap: true,
-                                          children: <Widget>[
-                                            const SizedBox(height: 20),
-                                            // TODO: Munculkan informasi yang didapat dari form
-                                            const Text(
-                                              'Data berhasil ditambahkan',
-                                              textAlign: TextAlign.center,
+                            child: const Text("Add Prescription"),
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    final response = await request.post(
+                                        'https://medstem.up.railway.app/apotek/json/',
+                                        jsonEncode(<String, String>{
+                                          'patient_name': patient_name,
+                                          'patient_age': patient_age,
+                                          'patient_gender': patient_gender,
+                                          'medicine': " "
+                                        })
+                                    );
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const ApotekMainPage()));
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return Dialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
                                             ),
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text('Kembali'),
+                                            elevation: 15,
+                                            child: Container(
+                                              child: ListView(
+                                                padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                                shrinkWrap: true,
+                                                children: <Widget>[
+                                                  const SizedBox(height: 20),
+                                                  // TODO: Munculkan informasi yang didapat dari form
+                                                  const Text(
+                                                    'Data berhasil ditambahkan',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: const Text('Kembali'),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
+                                          );
+                                        }
                                     );
                                   }
-                              );
-                            }
-                          },
-                        ),
+                                },
+
+                            ),
+
+                        // ElevatedButton(
+                        //   child: new Text("Add"),
+                        //   onPressed: () async {
+                        //     if (_formKey.currentState!.validate()) {
+                        //       final response = await request.post(
+                        //           'https://medstem.up.railway.app/apotek/json/',
+                        //           jsonEncode(<String, String>{
+                        //             'patient_name': patient_name,
+                        //             'patient_age': patient_age,
+                        //             'patient_gender': patient_gender,
+                        //             // 'medicine': medicine,
+                        //           })
+                        //       );
+                        //
+                        //       Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) => const ApotekMainPage()));
+                        //       showDialog(
+                        //           context: context,
+                        //           builder: (context) {
+                        //             return Dialog(
+                        //               shape: RoundedRectangleBorder(
+                        //                 borderRadius: BorderRadius.circular(10),
+                        //               ),
+                        //               elevation: 15,
+                        //               child: Container(
+                        //                 child: ListView(
+                        //                   padding: const EdgeInsets.only(top: 20, bottom: 20),
+                        //                   shrinkWrap: true,
+                        //                   children: <Widget>[
+                        //                     const SizedBox(height: 20),
+                        //                     // TODO: Munculkan informasi yang didapat dari form
+                        //                     const Text(
+                        //                       'Data berhasil ditambahkan',
+                        //                       textAlign: TextAlign.center,
+                        //                     ),
+                        //                     TextButton(
+                        //                       onPressed: () {
+                        //                         Navigator.pop(context);
+                        //                       },
+                        //                       child: const Text('Kembali'),
+                        //                     ),
+                        //                   ],
+                        //                 ),
+                        //               ),
+                        //             );
+                        //           }
+                        //       );
+                        //     }
+                        //   },
+                        // ),
                       ],
                     )),
               );
