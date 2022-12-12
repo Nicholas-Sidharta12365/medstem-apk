@@ -43,6 +43,7 @@ class _MyHomePageState extends State<CheckupPage> {
       listen: false,
     );
     CheckUpRemoteData dataSource = CheckUpRemoteData();
+    bool status = request.loggedIn;
 
     return Scaffold(
       appBar: AppBar(
@@ -62,7 +63,6 @@ class _MyHomePageState extends State<CheckupPage> {
           future: dataSource.fetchCheckUp(request),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
-              print('objext');
               return const Center(child: CircularProgressIndicator());
             } else {
               if (snapshot.data.length == 0) {

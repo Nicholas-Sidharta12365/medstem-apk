@@ -1,5 +1,6 @@
 import 'package:medstem/model/checkupmodel.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'dart:async';
 
 class CheckUpRemoteData {
   Future<List<Checkup>> fetchCheckUp(CookieRequest request) async {
@@ -13,7 +14,6 @@ class CheckUpRemoteData {
       }
       return result.toList();
     } catch (e) {
-      print(e);
       throw Exception('error: $e');
     }
   }
