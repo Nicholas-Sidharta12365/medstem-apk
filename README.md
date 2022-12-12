@@ -28,7 +28,7 @@ Aplikasi yang akan kami buat adalah sebuah aplikasi untuk memudahkan pelayanan r
 
 # Daftar modul yang akan diimplementasikan
 Dari manfaat yang disebutkan diatas, maka kelompok kami membuat lima fitur dalam menunjang aplikasi ini, sebagai berikut:
-1. Implementasi Register, login, logout
+1. Implementasi login
 Fitur ini mengelompokkan halaman sesuai dengan peran user yang login karena setiap peran akan mendapatkani fitur yang berbeda
 2. Childcare (Nicholas Sidharta): mengatur antrian dokter anak
 Fitur ini akan dapat diakses oleh tenaga medis khusus anak dan meliputi views sebagai berikut:
