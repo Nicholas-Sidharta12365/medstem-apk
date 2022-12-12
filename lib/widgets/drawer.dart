@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medstem/pages/apotek/apotek.dart';
 import 'package:medstem/pages/kasir/kasir.dart';
 import 'package:medstem/main.dart';
 import 'package:medstem/pages/childcare/childcare.dart';
@@ -26,6 +27,8 @@ class _MyDrawer extends State<DrawerClass> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
+    bool status = request.loggedIn;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -42,6 +45,20 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+          if (status)...[
+            ListTile(
+            leading: Icon(Icons.people),
+            title: Text("Logout"),
+            onTap: () async {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Homepage")),
+              );
+               final response = await request.logout(
+                  'https://medstem.up.railway.app/logout-flutter/');
+            },
+          ),
+          ]else...[
           ListTile(
             leading: Icon(Icons.people),
             title: Text("Login"),
@@ -52,6 +69,7 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+          ],
           ListTile(
             leading: Icon(Icons.health_and_safety),
             title: const Text("Childcare"),
@@ -64,6 +82,7 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+
           ListTile(
             leading: Icon(Icons.vaccines),
             title: Text("Vaksin"),
@@ -76,7 +95,17 @@ class _MyDrawer extends State<DrawerClass> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.money),
+            leading: Icon(Icons.medication_liquid_sharp),
+            title: Text("Pharmacy"),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const ApotekMainPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart_checkout_outlined),
             title: Text("Checkout"),
             onTap: () {
               Navigator.pushReplacement(
