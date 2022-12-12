@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../widgets/drawer.dart';
 import 'apotek_form.dart';
+import 'meds_list.dart';
 import 'package:medstem/model/apotek_model.dart';
 
 //
@@ -314,7 +315,7 @@ class _ApotekMainPageState extends State<ApotekMainPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ApotekFormPage(),
+                    MaterialPageRoute(builder: (context) => MyMedicationListPage(),
                     ),
                   );
                 },
@@ -394,7 +395,7 @@ class _ApotekMainPageState extends State<ApotekMainPage> {
                                                 padding: const EdgeInsets.only(top: 20, bottom: 20),
                                                 shrinkWrap: true,
                                                 children: <Widget>[
-                                                  Center(child: const Text('Vaccine Details')),
+                                                  Center(child: const Text('Patient Details')),
                                                   SizedBox(height: 20),
                                                   // TODO: Munculkan informasi yang didapat dari form
                                                   Text(
