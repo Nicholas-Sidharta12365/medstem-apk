@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medstem/pages/checkup/checkup.dart';
 import 'package:medstem/pages/kasir/kasir.dart';
 import 'package:medstem/main.dart';
 import 'package:medstem/pages/childcare/childcare.dart';
@@ -13,7 +14,7 @@ class DrawerClass extends StatefulWidget {
 }
 
 class _MyDrawer extends State<DrawerClass> {
-    @override
+  @override
   void initState() {
     super.initState();
   }
@@ -31,7 +32,8 @@ class _MyDrawer extends State<DrawerClass> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Homepage")),
+                MaterialPageRoute(
+                    builder: (context) => const MyHomePage(title: "Homepage")),
               );
             },
           ),
@@ -51,7 +53,9 @@ class _MyDrawer extends State<DrawerClass> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ChildcarePage(title: "Childcare")),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const ChildcarePage(title: "Childcare")),
               );
             },
           ),
@@ -61,7 +65,8 @@ class _MyDrawer extends State<DrawerClass> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const VaccineDataPage()),
+                MaterialPageRoute(
+                    builder: (context) => const VaccineDataPage()),
               );
             },
           ),
@@ -75,6 +80,16 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+          ListTile(
+              leading: Icon(Icons.local_hospital_outlined),
+              title: Text("Checkup"),
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const CheckupPage(title: "Checkup")));
+              }),
         ],
       ),
     );
