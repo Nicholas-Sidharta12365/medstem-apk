@@ -33,8 +33,6 @@ Fitur ini mengelompokkan halaman sesuai dengan peran user yang login karena seti
 2. Childcare (Nicholas Sidharta): mengatur antrian dokter anak
 Fitur ini akan dapat diakses oleh tenaga medis khusus anak dan meliputi views sebagai berikut:
     - add queue: untuk menambahkan seorang pasien ke dalam antrian
-    - update queue: untuk menunjukkan/memperbarui antrian pasien anak yang ada
-    - complete a queue: untuk seorang staff childcare menghapus antrian yang sudah selesai
     - no login page: page untuk pengguna yang tidak login
 3. Rawat Jalan (Amelia Putri Chaerani) : mengatur antrian dokter umum
 Fitur ini akan dapat diakses oleh tenaga medis dokter umum dan perawat dan meliputi views sebagai berikut:
