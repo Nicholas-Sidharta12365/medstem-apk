@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medstem/pages/apotek/apotek.dart';
 import 'package:medstem/pages/apotek/meds_list.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import '../../main.dart';
 
 class MyFormPage extends StatefulWidget {
@@ -12,6 +16,8 @@ class MyFormPage extends StatefulWidget {
 }
 
 class _MyFormPageState extends State<MyFormPage> {
+  String patient_name = '';
+  String patient_age = '';
   String _jeniskelamin = "";
 
   TextEditingController nameController = TextEditingController();
@@ -47,6 +53,7 @@ class _MyFormPageState extends State<MyFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Form Add Prescription'),
@@ -64,6 +71,22 @@ class _MyFormPageState extends State<MyFormPage> {
                       labelText: "Patient Name",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0))),
+                  onChanged: (String? value) {
+                    setState(() {
+                      patient_name = value!;
+                    });
+                  },
+                  // onSaved: (String? value) {
+                  //   setState(() {
+                  //     patient_name = value!;
+                  //   });
+                  // },
+                  // validator: (String? value) {
+                  //   if (value == null || value.isEmpty) {
+                  //     return "Patient name cannot be empty!";
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20.0)),
                 TextField(
@@ -119,10 +142,10 @@ class _MyFormPageState extends State<MyFormPage> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MyMedicationPage(
-              name: nameController.text,
-              age: ageController.text,
-              diagnosis: diagnosisController.text,
-              sex: _jeniskelamin,
+              patient_name: nameController.text,
+              patient_age: ageController.text,
+              // : diagnosisController.text,
+              patient_gender: _jeniskelamin,
             )),
           );
         },
@@ -131,111 +154,16 @@ class _MyFormPageState extends State<MyFormPage> {
   }
 }
 
-// class MedicationPage extends StatelessWidget {
-//   const MedicationPage({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Second Route'),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//           child: const Text('Go back!'),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// import 'package:flutter/material.dart';
-// import 'package:flutter_select_all_list/data.dart';
-//
-// class MyMedicationPage extends StatefulWidget {
-//   @override
-//   _MedicationPageState createState() => _MedicationPageState();
-// }
-//
-// class _MedicationPageState extends State<MyMedicationPage> {
-//   List<Map> staticData = MyMedicineData.data;
-//   Map<int, bool> selectedFlag = {};
-//   bool isSelectionMode = false;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Select Item'),
-//       ),
-//       body: ListView.builder(
-//         itemBuilder: (builder, index) {
-//           Map data = staticData[index];
-//           return ListTile(
-//             title: Text("${data['name']}"),
-//             subtitle: Text("${data['email']}"),
-//             leading: CircleAvatar(
-//               child: Text('${data['id']}'),
-//             ),
-//           );
-//         },
-//         itemCount: staticData.length,
-//       ),
-//     );
-//   }
-//   void onLongPress(bool isSelected, int index) {
-//     setState(() {
-//       selectedFlag[index] = !isSelected;
-//       // If there will be any true in the selectionFlag then
-//       // selection Mode will be true
-//       isSelectionMode = selectedFlag.containsValue(true);
-//     });
-//   }
-//
-//   Widget _buildSelectIcon(bool isSelected, Map data) {
-//     if (isSelectionMode) {
-//       return Icon(
-//         isSelected ? Icons.check_box : Icons.check_box_outline_blank,
-//         color: Theme.of(context).primaryColor,
-//       );
-//     } else {
-//       return CircleAvatar(
-//         child: Text('${data['id']}'),
-//       );
-//     }
-//   }
-//   void onTap(bool isSelected, int index) {
-//     if (isSelectionMode) {
-//       setState(() {
-//         selectedFlag[index] = !isSelected;
-//         isSelectionMode = selectedFlag.containsValue(true);
-//       });
-//     } else {
-//       // Open Detail Page
-//     }
-//   }
-// }
-//
-//
-//
-// import 'package:flutter/material.dart';
-// import 'package:flutter_select_all_list/data.dart';
-
 class MyMedicationPage extends StatefulWidget {
-  final String name;
-  final String age;
-  final String diagnosis;
-  final String sex;
+  final String patient_name;
+  final String patient_age;
+  final String patient_gender;
 
   const MyMedicationPage({
     super.key,
-    required this.name,
-    required this.age,
-    required this.diagnosis,
-    required this.sex,
+    required this.patient_name,
+    required this.patient_age,
+    required this.patient_gender,
   });
 
   @override
@@ -245,9 +173,15 @@ class MyMedicationPage extends StatefulWidget {
 class _MedicationPageState extends State<MyMedicationPage> {
   List<Map> staticData = MyMedicineData.data;
   Map<int, bool> selectedFlag = {};
+  String patient_name = '';
+  String patient_age = '';
+  String patient_gender = '';
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: Text('Select Medications'),
@@ -281,10 +215,10 @@ class _MedicationPageState extends State<MyMedicationPage> {
                     height: 200.0,
                     child: Column(
                       children: <Widget>[
-                        Text("Patient Name: ${widget.name}"),
-                        Text("Patient Age: ${widget.age}"),
-                        Text("Diagnosis: ${widget.diagnosis}"),
-                        Text("Sex: ${widget.sex}"),
+                        Text("Patient Name: ${widget.patient_name}"),
+                        Text("Patient Age: ${widget.patient_age}"),
+                        // Text("Diagnosis: ${widget.diagnosis}"),
+                        Text("Sex: ${widget.patient_gender}"),
                         Text("Prescription: "),
                         Column(
                           children: List.generate(staticData.length, (index) {
@@ -296,8 +230,60 @@ class _MedicationPageState extends State<MyMedicationPage> {
                           }),
                         ),
                         ElevatedButton(
-                            child: new Text("OK"),
-                            onPressed: () => Navigator.pop(context))
+                            child: new Text("Back"),
+                            onPressed: () => Navigator.pop(context)),
+                        ElevatedButton(
+                            child: new Text("Add"),
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                          final response = await request.post(
+                            'https://medstem.up.railway.app/apotek/json/',
+                            jsonEncode(<String, String>{
+                              'patient_name': patient_name,
+                              'patient_age': patient_age,
+                              'patient_gender': patient_gender,
+                              // 'medicine': medicine,
+                            })
+                          );
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Apotek()));
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    elevation: 15,
+                                    child: Container(
+                                      child: ListView(
+                                        padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                        shrinkWrap: true,
+                                        children: <Widget>[
+                                          const SizedBox(height: 20),
+                                          // TODO: Munculkan informasi yang didapat dari form
+                                          const Text(
+                                            'Data berhasil ditambahkan',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Kembali'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }
+                            );
+                          }
+                        },
+                        ),
                       ],
                     )),
               );
@@ -322,29 +308,4 @@ class _MedicationPageState extends State<MyMedicationPage> {
       color: Theme.of(context).primaryColor,
     );
   }
-
-// Widget? _buildSelectAllButton() {
-//   bool isFalseAvailable = selectedFlag.containsValue(false);
-//   if (isSelectionMode) {
-//     return FloatingActionButton(
-//       onPressed: _selectAll,
-//       child: Icon(
-//         isFalseAvailable ? Icons.done_all : Icons.remove_done,
-//       ),
-//     );
-//   } else {
-//     return null;
-//   }
-// }
-//
-// void _selectAll() {
-//   bool isFalseAvailable = selectedFlag.containsValue(false);
-//   // If false will be available then it will select all the checkbox
-//   // If there will be no false then it will de-select all
-//   selectedFlag.updateAll((key, value) => isFalseAvailable);
-//   setState(() {
-//     isSelectionMode = selectedFlag.containsValue(true);
-//   });
-// }
-
 }
