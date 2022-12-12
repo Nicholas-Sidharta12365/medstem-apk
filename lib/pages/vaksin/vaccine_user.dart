@@ -40,10 +40,16 @@ class _VaccineUserPageState extends State<VaccineUserPage> {
     final request = context.watch<CookieRequest>();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Data Vaksin'),
         ),
-        body: Column(children: [
+        body: DecoratedBox(
+          decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/vaksin-ifloggin!.png"), fit: BoxFit.fill),
+          ),
+          child: Column(children: [
+          const SizedBox(height: 10),
           TextButton(
                 child: const Text(
                   "Kembali",
@@ -90,7 +96,7 @@ class _VaccineUserPageState extends State<VaccineUserPage> {
                                   horizontal: 16, vertical: 12),
                               padding: const EdgeInsets.all(20.0),
                               decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Color.fromARGB(255, 0, 50, 100),
                                   borderRadius: BorderRadius.circular(15.0),
                                   boxShadow: const [
                                     BoxShadow(
@@ -111,8 +117,8 @@ class _VaccineUserPageState extends State<VaccineUserPage> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       elevation: 15,
-                                      child: Container(
-                                        child: ListView(
+                                      child: SingleChildScrollView(child: Column(
+                                        children: [ ListView(
                                           padding: const EdgeInsets.only(top: 20, bottom: 20),
                                           shrinkWrap: true,
                                           children: <Widget>[
@@ -142,13 +148,16 @@ class _VaccineUserPageState extends State<VaccineUserPage> {
                                               ),
                                             TextButton(
                                               onPressed: () {
-                                                Navigator.pop(context);
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                  builder: (context) => const VaccineDataPage()));
                                               },
                                               child: Text('Kembali'),
                                             ), 
                                           ],
                                         ),
-                                      ),
+                                    ])),        
                                     );
                                   });
                                     },
@@ -158,7 +167,7 @@ class _VaccineUserPageState extends State<VaccineUserPage> {
                                     style: const TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.blue,
+                                      color: Colors.white70,
                                     ),
                                     )
                                   ),
@@ -174,6 +183,6 @@ class _VaccineUserPageState extends State<VaccineUserPage> {
           ),
             ])
 
-        );
+        ));
   }
 }

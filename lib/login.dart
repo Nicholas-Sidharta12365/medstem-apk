@@ -143,6 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                                   }));
                               // print(response.body);
                               bool status = response['status'];
+                              request.loggedIn = true;
                               // print(jsonDecode(response.body));
                               if (status) {
                                 ScaffoldMessenger.of(context)
