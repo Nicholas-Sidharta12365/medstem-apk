@@ -27,7 +27,7 @@ class _EditDosePageState extends State<EditDosePage> {
   Widget build (BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Vaksin')),
+      appBar: AppBar(title: const Text('Edit Dose')),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
