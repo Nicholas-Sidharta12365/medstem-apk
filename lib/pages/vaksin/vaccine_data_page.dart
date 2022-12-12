@@ -54,7 +54,7 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
         drawer: DrawerClass(),
         body: 
         
-        child:Column(
+        Column(
         // controller: _controller,
           children: [
               if (status)...[
