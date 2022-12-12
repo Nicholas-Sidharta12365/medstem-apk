@@ -14,7 +14,7 @@ flutter run
 ```
 
 # How to use
-Download the latest release of the app (On-Progress)
+Download the latest release of the app (On-Progress)<br>
 Download Link: APP LINK TODO
 
 # Nama-nama anggota kelompok
