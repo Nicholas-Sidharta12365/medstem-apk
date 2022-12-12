@@ -7,6 +7,7 @@ import 'package:medstem/pages/vaksin/vaccine_data_page.dart';
 import 'package:medstem/login.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:medstem/pages/checkup/checkup.dart';
 
 class DrawerClass extends StatefulWidget {
   const DrawerClass({Key? key}) : super(key: key);
@@ -23,6 +24,8 @@ class _MyDrawer extends State<DrawerClass> {
   }
 
   @override
+
+  @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
     bool status = request.loggedIn;
@@ -37,7 +40,8 @@ class _MyDrawer extends State<DrawerClass> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Homepage")),
+                MaterialPageRoute(
+                    builder: (context) => const MyHomePage(title: "Homepage")),
               );
             },
           ),
@@ -72,7 +76,9 @@ class _MyDrawer extends State<DrawerClass> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ChildcarePage(title: "Childcare")),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const ChildcarePage(title: "Childcare")),
               );
             },
           ),
@@ -83,7 +89,8 @@ class _MyDrawer extends State<DrawerClass> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const VaccineDataPage()),
+                MaterialPageRoute(
+                    builder: (context) => const VaccineDataPage()),
               );
             },
           ),
@@ -107,6 +114,16 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+          ListTile(
+              leading: Icon(Icons.local_hospital_outlined),
+              title: Text("Checkup"),
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const CheckupPage(title: "Checkup")));
+              }),
         ],
       ),
     );
