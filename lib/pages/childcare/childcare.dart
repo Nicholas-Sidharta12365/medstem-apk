@@ -33,8 +33,9 @@ class ChildcarePage extends StatefulWidget {
 class _MyHomePageState extends State<ChildcarePage> {
   Future<List<ChildcareModel>> fetchChildcareData(CookieRequest request) async {
     // decode the response into the json form
-    var data = await request.get('https://medstem.up.railway.app/childcare/json/');
 
+    var data =
+        await request.get('https://medstem.up.railway.app/childcare/json/');
     // convert the json data into VaccineData object
     List<ChildcareModel> listVaccineData = [];
     for (var d in data) {
@@ -43,13 +44,14 @@ class _MyHomePageState extends State<ChildcarePage> {
       }
     }
 
-    print(listVaccineData);
     return listVaccineData;
   }
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
+    bool status = request.loggedIn;
 
     return Scaffold(
       appBar: AppBar(
@@ -67,12 +69,28 @@ class _MyHomePageState extends State<ChildcarePage> {
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 40, top: 40),
-            child: const Text(
-              "CHILDCARE",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
+            child: Center(
+              child: RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'CHILD',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 230, 48, 35),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'CARE',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 12, 112, 195),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -97,6 +115,7 @@ class _MyHomePageState extends State<ChildcarePage> {
               ),
             ),
           ),
+          if(status)...[
           Container(
             margin: const EdgeInsets.only(bottom: 40),
             child: Row(
@@ -113,12 +132,6 @@ class _MyHomePageState extends State<ChildcarePage> {
                     );
                   },
                 ),
-                ElevatedButton(
-                  child: const Text('Update'),
-                  onPressed: () {
-                    // handler
-                  },
-                ),
               ],
             ),
           ),
@@ -126,12 +139,12 @@ class _MyHomePageState extends State<ChildcarePage> {
               future: fetchChildcareData(request),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
-                  // print("null geming");
                   return const Center(child: CircularProgressIndicator());
-                  // return const Text("404 Sadge");
                 } else {
                   if (snapshot.hasData) {
                     return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (_, index) => DataTable(
                         columns: const [
@@ -142,11 +155,11 @@ class _MyHomePageState extends State<ChildcarePage> {
                         ],
                         rows: [
                           DataRow(cells: [
-                            DataCell(Text('${snapshot.data![index].name}')),
-                            DataCell(Text('${snapshot.data![index].date}')),
-                            DataCell(Text('${snapshot.data![index].doctor}')),
+                            DataCell(Text(snapshot.data![index].fields.name)),
+                            DataCell(Text(snapshot.data![index].fields.date)),
+                            DataCell(Text(snapshot.data![index].fields.doctor)),
                             DataCell(
-                                Text('${snapshot.data![index].description}')),
+                                Text(snapshot.data![index].fields.description)),
                           ]),
                         ],
                       ),
@@ -166,6 +179,20 @@ class _MyHomePageState extends State<ChildcarePage> {
                   }
                 }
               }),
+          ]
+          else...[
+            Container(
+              margin: const EdgeInsets.only(bottom: 40, top: 40),
+              child: const Text(
+                "Please Log In to See the Queue",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ]
         ],
       ),
     );
