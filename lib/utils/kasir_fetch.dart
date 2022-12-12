@@ -2,7 +2,7 @@ import 'package:medstem/model/kasir_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<List<Chasier>> fetchBmi() async {
+Future<List<Chasier>> fetchChasier() async {
   var url = Uri.parse('https://medstem.up.railway.app/kasir/json/');
   var response = await http.get(
     url,
