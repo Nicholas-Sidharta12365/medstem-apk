@@ -15,6 +15,7 @@ flutter run
 
 # How to use
 Download the latest release of the app (On-Progress)
+Download Link: APP LINK TODO
 
 # Nama-nama anggota kelompok
 1. Naila Azizah - 2106705814
