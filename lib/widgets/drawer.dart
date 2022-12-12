@@ -4,6 +4,8 @@ import 'package:medstem/main.dart';
 import 'package:medstem/pages/childcare/childcare.dart';
 import 'package:medstem/pages/vaksin/vaccine_data_page.dart';
 import 'package:medstem/login.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class DrawerClass extends StatefulWidget {
   const DrawerClass({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class DrawerClass extends StatefulWidget {
 }
 
 class _MyDrawer extends State<DrawerClass> {
+
     @override
   void initState() {
     super.initState();
@@ -20,6 +23,8 @@ class _MyDrawer extends State<DrawerClass> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
+    bool status = request.loggedIn;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -35,6 +40,20 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+          if (status)...[
+            ListTile(
+            leading: Icon(Icons.people),
+            title: Text("Logout"),
+            onTap: () async {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const MyHomePage(title: "Homepage")),
+              );
+               final response = await request.logout(
+                  'https://medstem.up.railway.app/logout-flutter/');
+            },
+          ),
+          ]else...[
           ListTile(
             leading: Icon(Icons.people),
             title: Text("Login"),
@@ -45,6 +64,7 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+          ],
           ListTile(
             leading: Icon(Icons.health_and_safety),
             title: const Text("Childcare"),
