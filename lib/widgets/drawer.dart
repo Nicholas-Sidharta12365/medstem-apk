@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:medstem/pages/checkup/checkup.dart';
 import 'package:medstem/pages/kasir/kasir.dart';
 import 'package:medstem/main.dart';
 import 'package:medstem/pages/childcare/childcare.dart';
 import 'package:medstem/pages/vaksin/vaccine_data_page.dart';
 import 'package:medstem/login.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:medstem/pages/checkup/checkup.dart';
 
 class DrawerClass extends StatefulWidget {
   const DrawerClass({Key? key}) : super(key: key);
@@ -14,10 +16,13 @@ class DrawerClass extends StatefulWidget {
 }
 
 class _MyDrawer extends State<DrawerClass> {
-  @override
+
+    @override
   void initState() {
     super.initState();
   }
+
+  @override
 
   @override
   Widget build(BuildContext context) {
