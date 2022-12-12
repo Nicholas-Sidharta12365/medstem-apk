@@ -55,6 +55,7 @@ class _MyDrawer extends State<DrawerClass> {
               );
             },
           ),
+
           ListTile(
             leading: Icon(Icons.vaccines),
             title: Text("Vaksin"),
@@ -66,7 +67,7 @@ class _MyDrawer extends State<DrawerClass> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.money),
+            leading: Icon(Icons.shopping_cart_checkout_outlined),
             title: Text("Checkout"),
             onTap: () {
               Navigator.pushReplacement(
