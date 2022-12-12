@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'package:medstem/widgets/drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:medstem/model/vaccine_data.dart';
 import 'package:medstem/pages/vaksin/vaccine_add.dart';
 import 'package:medstem/pages/vaksin/vaccine_user.dart';
@@ -14,7 +12,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 class VaccineDetails {
   static late Fields _getDetails;
   static Fields get fetcher => _getDetails;
-  static late List<String> _dataSaved = [];
+  static List<String> _dataSaved = [];
   static List<String> get dataSaved => _dataSaved;
 }
 
@@ -45,19 +43,31 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     bool status = request.loggedIn;
+    VaccineDetails._dataSaved = [];
     ScrollController _controller = new ScrollController();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Data Vaksin'),
         ),
         drawer: DrawerClass(),
-        body: 
+        body: DecoratedBox(
+          decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/vaksin-ifloggin!.png"), fit: BoxFit.fill),
+          ),
         
+        child: Container(
+          width : MediaQuery.of(context).size.width,
+          height : MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(child:
         Column(
         // controller: _controller,
           children: [
-              if (status)...[
+            if (status)...[
+              const SizedBox(height: 20),
+              Text("VAKSIN", style: TextStyle(fontSize: 36, color: Colors.white70)),
+              const SizedBox(height: 20),
               TextButton(
                 child: const Text(
                   "Vaksin User",
@@ -73,6 +83,7 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                       builder: (context) => const VaccineUserPage()));
                 }
               ),
+              const SizedBox(height: 20),
             FutureBuilder(
                 future: fetchVaccineData(request),
                 builder: (context, AsyncSnapshot snapshot) {
@@ -102,7 +113,7 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                                     horizontal: 16, vertical: 12),
                                 padding: const EdgeInsets.all(20.0),
                                 decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Color.fromARGB(255, 0, 50, 100),
                                     borderRadius: BorderRadius.circular(15.0),
                                     boxShadow: const [
                                       BoxShadow(
@@ -170,7 +181,7 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                                       style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.blue,
+                                        color: Colors.white70,
                                       ),
                                       )
                                     ),
@@ -183,14 +194,15 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                     }
                   }
                 }),
-              
+                const SizedBox(height: 20),
                 Center(
                     child: Row (
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                  const SizedBox(height: 20),
                   Padding(
                     padding: EdgeInsets.only(right: 4, left:4),
-                    child: 
+                    child:
                     TextButton(
                         child: const Text(
                           "Add Vaksin",
@@ -225,42 +237,54 @@ class _VaccineDataPageState extends State<VaccineDataPage> {
                                 builder: (context) => const EditDosePage()));
                           }
                         ),
+                        
                         )
+                        
                     ],)
-                  )
+                ),
+                const SizedBox(height: 20),
               ] else ...[
-                Center(child: Column(children: [
-                  const Text(
-                    "Please Log In First",
+                Center(
+                  child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Column(
+                    children: [
+                    const SizedBox(height: 255),
+                    const Text(
+                    "Proceed to login for access",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                      color: Colors.white70,
                     ),
                   ),
-                TextButton(
-                    child: const Text(
-                      "Log In",
-                      style: TextStyle(color: Colors.white),
+                  const SizedBox(height: 10),
+                  TextButton(
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 0, 75, 150)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
+                      }
                     ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginPage()));
-                    }
+                  ]
                   ),
                 ]),
                 )
-              ]    
-            ],)
-
-        
-            );
+              ]
+            
+          ])),
+        )
+      )
+    );
 
   }
 }
