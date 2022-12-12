@@ -1,7 +1,8 @@
 # MedStem
 ## Tugas Kelompok PBP Gasal 2022/2023
 
-![](https://build.appcenter.ms/v0.1/apps/eae9416d-3ca4-4ad0-9d56-639fad4d333f/branches/main/badge)
+![](https://build.appcenter.ms/v0.1/apps/eae9416d-3ca4-4ad0-9d56-639fad4d333f/branches/main/badge) <br>
+Badge broken: https://build.appcenter.ms/v0.1/apps/eae9416d-3ca4-4ad0-9d56-639fad4d333f/branches/main/badge
 
 # How to Run (For Development)
 
